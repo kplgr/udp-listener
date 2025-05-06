@@ -118,7 +118,7 @@ namespace UdpListener
 
                     int messageByteOffset = 0;
 
-                    Console.WriteLine("\tPosition\tType\t\tLength\t\tName\t\tContent");
+                    Console.WriteLine("\tPosition\tType\t\tLength\t\tName\t\t\tContent");
 
                     for (int i = 0; i < messagePrototype.Length; i++)
                     {
@@ -127,25 +127,26 @@ namespace UdpListener
                         int valueTypeBytes = (int)part.ValueType;
                         string valueTypeName = part.ValueType.ToString();
 
+                        object value;
+
                         switch (part.ValueType)
                         {
                             case FedLabsMessageValueTypes.Double:
-                                var valueDouble = BitConverter.ToDouble(receivedBytes, messageByteOffset);
-
-                               Console.WriteLine($"\t{i}\t\t{valueTypeName}\t\t{valueTypeBytes}\t\t{part.Name}\t\t{valueDouble,+12:+0.000000;-0.000000; 0.000000}");
+                                value = BitConverter.ToDouble(receivedBytes, messageByteOffset);
                                 messageByteOffset += (int)FedLabsMessageValueTypes.Double;
                                 break;
 
                             case FedLabsMessageValueTypes.Int32:
-                                var valueInt32 = BitConverter.ToInt32(receivedBytes, messageByteOffset);
-
-                                Console.WriteLine($"\t{i}\t\t{valueTypeName}\t\t{valueTypeBytes}\t\t{part.Name}\t\t{valueInt32}");
+                                value = BitConverter.ToInt32(receivedBytes, messageByteOffset);
                                 messageByteOffset += (int)FedLabsMessageValueTypes.Int32;
                                 break;
 
                             default:
                                 throw new Exception("Unsupported type");
                         }
+
+                        Console.WriteLine($"\t{i}\t\t{valueTypeName}\t\t{valueTypeBytes}\t\t{part.Name,-12}\t\t{value,+12:+0.000000;-0.000000; 0.000000}");
+
 
 
                     }
