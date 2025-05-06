@@ -40,22 +40,24 @@ namespace UdpListener
             {
                 FedLabsMessagePart.Double("Clock"),
 
-                FedLabsMessagePart.Double("Rx ECI"),
-                FedLabsMessagePart.Double("Ry ECI"),
-                FedLabsMessagePart.Double("Rz ECI"),
+                FedLabsMessagePart.Double("Rx [ECI]"),
+                FedLabsMessagePart.Double("Ry [ECI]"),
+                FedLabsMessagePart.Double("Rz [ECI]"),
 
-                FedLabsMessagePart.Double("Vx ECI"),
-                FedLabsMessagePart.Double("Vy ECI"),
-                FedLabsMessagePart.Double("Vz ECI"),
+                FedLabsMessagePart.Double("Vx [ECI]"),
+                FedLabsMessagePart.Double("Vy [ECI]"),
+                FedLabsMessagePart.Double("Vz [ECI]"),
 
-                FedLabsMessagePart.Double("Ux ECI"),
-                FedLabsMessagePart.Double("Uy ECI"),
-                FedLabsMessagePart.Double("Uz ECI"),
+                FedLabsMessagePart.Double("qr"),
+                FedLabsMessagePart.Double("qx"),
+                FedLabsMessagePart.Double("qy"),
+                FedLabsMessagePart.Double("qz"),
 
 
-                FedLabsMessagePart.Double("Wx ECI"),
-                FedLabsMessagePart.Double("Wy ECI"),
-                FedLabsMessagePart.Double("Wz ECI"),
+
+                FedLabsMessagePart.Double("Wx [body]"),
+                FedLabsMessagePart.Double("Wy [body]"),
+                FedLabsMessagePart.Double("Wz [body]"),
 
             };
 
