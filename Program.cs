@@ -92,7 +92,7 @@ namespace UdpListener
 
                     (int quotient, int remainder) = Math.DivRem(receivedBytes.Length, 8);
 
-                    Console.WriteLine($"Received message {messageCount++}: {receivedBytes.Length} bytes ({quotient} / {remainder}) from {endPoint.Address}:{endPoint.Port}");
+                    Console.WriteLine($"Message {messageCount++}: {receivedBytes.Length} bytes ({quotient} / {remainder}) from {endPoint.Address}:{endPoint.Port} at {DateTime.UtcNow}");
 
                     if (receivedBytes.Length != defaultMessagePrototype.Sum(x => (int)x.ValueType))
                     {
