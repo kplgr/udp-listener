@@ -92,7 +92,7 @@ namespace UdpListener
 
                     Console.WriteLine($"Received message {messageCount++}: {receivedBytes.Length} bytes ({quotient} / {remainder}) ");
 
-                    if (receivedBytes.Length != messagePrototype.Sum(x => (int)x.ValueType))
+                    if (receivedBytes.Length != defaultMessagePrototype.Sum(x => (int)x.ValueType))
                     {
                     
 
