@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "UdpListener": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "dockerRunOptions": "--publish 5802:5000"
+    }
+  }
+}

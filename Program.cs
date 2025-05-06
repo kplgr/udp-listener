@@ -33,15 +33,8 @@ namespace UdpListener
 
         static void Main(string[] args)
         {
-            int port = 5802;
+            const int port = 5802;
 
-
-            //var messagePrototype = new FedLabsMessagePart[] 
-            //{
-            //    FedLabsMessagePart.Double("Clock"),
-            //    FedLabsMessagePart.Double("X val"),
-            //    FedLabsMessagePart.Double("Y val")
-            //};
 
             var messagePrototype = new FedLabsMessagePart[]
             {
@@ -81,6 +74,8 @@ namespace UdpListener
 
             Console.WriteLine($"Listening for UDP messages on port {port}...");
 
+            ulong messageCount = 0;
+
             // Continuously listen for incoming UDP packets
             while (true)
             {
@@ -93,13 +88,15 @@ namespace UdpListener
                     //string receivedMessage = Encoding.UTF8.GetString(receivedBytes);
 
 
-                    Console.WriteLine($"Received bytes [{receivedBytes.Length}]:");
+                    Console.WriteLine($"Received message {messageCount++}: {receivedBytes.Length} bytes");
 
                     if (receivedBytes.Length != messagePrototype.Sum(x => (int)x.ValueType))
                     {
                         Console.WriteLine("\tINCONSISTENT MESSAGE LENGTH\n");
                         continue;
                     }
+
+                    
 
                     int messageByteOffset = 0;
 
@@ -136,6 +133,7 @@ namespace UdpListener
                     }
 
                     Console.WriteLine();
+
                 }
                 catch (Exception ex)
                 {
