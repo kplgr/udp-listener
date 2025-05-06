@@ -36,7 +36,7 @@ namespace UdpListener
             const int port = 5802;
 
 
-            var messagePrototype = new FedLabsMessagePart[]
+            var defaultMessagePrototype = new FedLabsMessagePart[]
             {
                 FedLabsMessagePart.Double("Clock"),
 
@@ -59,6 +59,7 @@ namespace UdpListener
 
             };
 
+            var messagePrototype = Array.Empty<FedLabsMessagePart>();
 
 
 
@@ -92,10 +93,23 @@ namespace UdpListener
 
                     if (receivedBytes.Length != messagePrototype.Sum(x => (int)x.ValueType))
                     {
-                        Console.WriteLine("\tINCONSISTENT MESSAGE LENGTH\n");
-                        continue;
-                    }
+                        Console.WriteLine("\tUNEXPECTED MESSAGE LENGTH --- IMPROVISING\n");
 
+                        (int quotient, int remainder) = Math.DivRem(receivedBytes.Length, 8);
+
+                        if (remainder != 0)
+                        {
+                            Console.WriteLine("\tMESSAGE LENGTH NOT MULTIPLE OF 8 BYTES --- FUCKING OFF\n");
+                            continue;
+                        }
+
+                        messagePrototype = Enumerable.Range(0, quotient).Select(x => FedLabsMessagePart.Double($"VAL {x}")).ToArray();
+
+                    }
+                    else
+                    {
+                        messagePrototype = defaultMessagePrototype;
+                    }
                     
 
                     int messageByteOffset = 0;
