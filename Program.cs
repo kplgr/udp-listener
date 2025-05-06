@@ -88,15 +88,15 @@ namespace UdpListener
                     // Convert the received bytes to a string
                     //string receivedMessage = Encoding.UTF8.GetString(receivedBytes);
 
+                    (int quotient, int remainder) = Math.DivRem(receivedBytes.Length, 8);
 
-                    Console.WriteLine($"Received message {messageCount++}: {receivedBytes.Length} bytes");
+                    Console.WriteLine($"Received message {messageCount++}: {receivedBytes.Length} bytes ({quotient} / {remainder}) ");
 
                     if (receivedBytes.Length != messagePrototype.Sum(x => (int)x.ValueType))
                     {
-                        (int quotient, int remainder) = Math.DivRem(receivedBytes.Length, 8);
+                    
 
-
-                        Console.WriteLine($"\tUNEXPECTED MESSAGE LENGTH ({quotient} / {remainder}) --- IMPROVISING\n");
+                        Console.WriteLine($"\tUNEXPECTED MESSAGE LENGTH --- IMPROVISING\n");
 
                         
                         if (remainder != 0)
