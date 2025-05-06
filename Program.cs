@@ -33,7 +33,7 @@ namespace UdpListener
 
         static void Main(string[] args)
         {
-            const int port = 5802;
+            const int port = 5000;
 
 
             var defaultMessagePrototype = new FedLabsMessagePart[]
@@ -93,10 +93,12 @@ namespace UdpListener
 
                     if (receivedBytes.Length != messagePrototype.Sum(x => (int)x.ValueType))
                     {
-                        Console.WriteLine("\tUNEXPECTED MESSAGE LENGTH --- IMPROVISING\n");
-
                         (int quotient, int remainder) = Math.DivRem(receivedBytes.Length, 8);
 
+
+                        Console.WriteLine($"\tUNEXPECTED MESSAGE LENGTH ({quotient} / {remainder}) --- IMPROVISING\n");
+
+                        
                         if (remainder != 0)
                         {
                             Console.WriteLine("\tMESSAGE LENGTH NOT MULTIPLE OF 8 BYTES --- FUCKING OFF\n");

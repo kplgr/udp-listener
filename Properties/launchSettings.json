@@ -5,7 +5,7 @@
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
-      "dockerRunOptions": "--publish 5802:5000"
+      "dockerRunOptions": "--publish 5802:5000/udp"
     }
   }
 }
