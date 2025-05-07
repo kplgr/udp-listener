@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Net;
 using static UdpListener.Library;
 using Microsoft.Extensions.Logging;
+using System.Text;
 
 namespace UdpListener
 {
@@ -114,7 +115,10 @@ namespace UdpListener
 
             int messageByteOffset = 0;
 
-            Console.WriteLine("\tPosition\tType\t\tLength\t\tName\t\t\t\tContent");
+            StringBuilder builder = new StringBuilder();
+
+            
+            builder.AppendLine("\tPosition\tType\t\tLength\t\tName\t\t\t\tContent");
 
             for (int i = 0; i < messagePrototype.Length; i++)
             {
@@ -142,10 +146,12 @@ namespace UdpListener
                         throw new Exception($"No converter registered for {part.ValueType.GetType().FullName}");
                 }
 
-                Console.WriteLine($"\t{i}\t\t{valueTypeName}\t\t{valueTypeBytes}\t\t{part.Name,-12}\t\t\t{value,+12:+0.000000;-0.000000; 0.000000}");
+                builder.AppendLine($"\t{i}\t\t{valueTypeName}\t\t{valueTypeBytes}\t\t{part.Name,-12}\t\t\t{value,+12:+0.000000;-0.000000; 0.000000}");
             }
 
-            Console.WriteLine();
+            builder.AppendLine();
+
+            logger.LogInformation(builder.ToString());
         }
     }
 }
